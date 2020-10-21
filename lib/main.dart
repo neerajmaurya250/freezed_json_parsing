@@ -84,12 +84,37 @@ class NameList extends StatelessWidget {
     return ListView.builder(
         itemCount: person.length,
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Text(person[index].id.toString()),
-              Text(person[index].name),
-              Text(person[index].email),
-            ],
+          return Padding(
+            padding: const EdgeInsets.only(left: 20,right: 20),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Center(child: Text(person[index].id.toString(), style: TextStyle(color: Colors.white),)),
+                    ),
+
+                    SizedBox(width: 20,),
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(person[index].name, style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),
+                        SizedBox(height: 10,),
+                        Text(person[index].email,style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)),
+                      ],
+                    )
+
+                  ],
+                ),
+              ),
+            ),
           );
         });
   }
