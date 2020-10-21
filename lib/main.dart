@@ -19,20 +19,20 @@ abstract class Person with _$Person {
   factory Person.fromJson(Map<String, dynamic> json) =>  _$PersonFromJson(json);
 }
 
-Future<List<Person>> getHttp() async {
+Future getHttp() async {
   Dio dio = Dio();
 
     final url = 'https://jsonplaceholder.typicode.com/users';
-    Response response = await dio.get('$url');
+    Response response = await dio.get('$url/2');
     print(response.data);
-    return compute(parsePhotos,response.data);
+    return Person.fromJson(response.data);
 
 }
 
-Future<List<Person>> parsePhotos(dynamic responseBody) {
-  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  return parsed.map<Person>((json) => Person.fromJson(json)).toList();
-}
+// Future parsePhotos(dynamic responseBody) {
+//   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+//   return parsed.map<Person>((json) => Person.fromJson(json)).toList();
+// }
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
             print('/-/-/-/-//-/-/-/-/-/-/-/-/-/-/-/-/-/-//-/-/-/-/-/-/-/-'+snapshot.data.toString());
             Person p = snapshot.data;
             return Center(
-                child:Text(''));
+                child:Text(p.email));
           },
         ),
       ),
