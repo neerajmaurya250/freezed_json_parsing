@@ -1,4 +1,4 @@
-# g_map
+# freezed_json_parsing
 
 A new Flutter application.
 
